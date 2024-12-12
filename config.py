@@ -78,8 +78,8 @@ class Config:
 '''
 config = {
     # Simulation parameters
-    "forklifts": 30,  # Number of forklifts available in the warehouse
-    "forklifts_per_unload_dock": 4,  # Number of forklifts allocated per unloading dock
+    "forklifts": 34,  # Number of forklifts available in the warehouse
+    "forklifts_per_unload_dock": 4, # Number of forklifts allocated per unloading dock
     "forklifts_per_order_assembly": 2,
     "unloading_trucks_per_hour": 6,  # Number of trucks arriving for unloading per hour
     "loading_trucks_per_hour": 4,  # Number of trucks arriving for loading per hour
@@ -89,25 +89,26 @@ config = {
     "minimum_order_size": 5,  # Minimum number of pallets per order
     "maximum_order_size": 12,  # Maximum number of pallets per order
     "assembly_area_capacity": 1000,
-    "num_assembly_area": 7,
+    "initial_storage": 0.2,
     
     # Dock parameters
-    "num_unloading_docks": 5,  # Number of unloading docks available
+    "num_unloading_docks": 5,# Number of unloading docks available
+    "num_assembly_area": 7,
     "num_loading_docks": 7,  # Number of loading docks available
 
     # Pallet parameters
     "pallet_types": ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8"],  # Types of pallets
     "pallet_probs": [0.3, 0.15, 0.15, 0.08, 0.08, 0.08, 0.08, 0.08],
     # Simulation duration
-    "simulation_duration_minutes": 1440,  # Simulation duration in minutes (8 hours)
+    "simulation_duration_minutes": 1440,  # Simulation duration in minutes 
  
     # Existing parameters...
     "storage_aisles": 32,
     "storage_slots_per_aisle": 38,
     "storage_levels_per_slot": 5,
     
-    "forklift_speed_xy": 3,
-    "lever_speed_z": 5
+    "forklift_speed_xy": 3, #m/min
+    "lever_speed_z": 5 #m/min
 
 }
 

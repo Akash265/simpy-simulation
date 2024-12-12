@@ -1,6 +1,7 @@
 import random
 from collections import deque
 from config import config
+from pallet import Pallet
 
 class Storage:
     def __init__(self, num_aisles, num_levels, positions_per_level):
@@ -205,6 +206,7 @@ class AdvancedStorage:
             for slot in range(self.slots_per_aisle):
                 storage[aisle].append([None] * self.levels_per_slot)  # Levels initialized to None (empty)
         return storage
+    
 
     def _initialize_pallet_space(self):
         """
@@ -220,6 +222,25 @@ class AdvancedStorage:
                     for level in range(self.levels_per_slot):
                         pallet_space[pallet_type].append((aisle, slot, level))
         return pallet_space
+
+    def initial_storage(self, initial):
+        num_pallet_per_aisle= initial*self.total_capacity/self.num_aisles
+        # Get the aisles assigned for the pallet type
+        for pallet_type in self.pallet_types:
+            # Search for the first available space in the assigned aisles
+            assigned_aisles = self.aisle_assignment[pallet_type]
+            for aisle in assigned_aisles:
+                count = 0
+                for slot in range(self.slots_per_aisle):
+                    for level in range(self.levels_per_slot):
+                        if count<=num_pallet_per_aisle:  # Check if the location is free
+                            pallet = Pallet(f"Existing-Pallet", pallet_type)
+                            pallet.location = self.coordinates[(aisle, slot, level)]
+                            self.storage[aisle][slot][level] = pallet  # Store pallet
+                            count+=1
+                            #self.pallet_space[pallet_type].remove((aisle, slot, level))  # Remove from available space
+                        else:
+                            break
 
     def assign_storage_location(self, pallet):
         """
@@ -375,3 +396,5 @@ class AdvancedStorage:
             if (aisle, slot, level) in spaces:
                 return pallet_type
         return None
+
+

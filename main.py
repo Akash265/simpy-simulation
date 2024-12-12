@@ -17,8 +17,8 @@ order_assembling_times = []
 order_loading_mean_waiting_times = []
 mean_pallet_put_times = []
 mean_pallet_pickup_times = []
-t_unload_pallat = 0.1 #minutes
-t_check_inventory = 1 #minutes
+t_unload_pallat = 0.5 #minutes
+t_check_inventory = 3 #minutes
 t_order_assembly = 0.15 #minutes
 warmup_period = 120 #minutes
 def truck_arrival(env, resource_handler, unloading_docks, dock_list, truck_id):
@@ -214,10 +214,10 @@ def assemble_order(env, resource_handler, order, assembly_area_list, order_inven
 
                 # If no assembly area is available, wait and retry
                 print(f"[{round(env.now,2)}] Order {order_id} is waiting for an available assembly area.")
-                yield env.timeout(1)  # Check every 1 time unit
+                yield env.timeout(t_check_inventory)  # Check every 1 time unit
         else:
             print(f"[{round(env.now,2)}] Order {order_id} is waiting for missing pallets: {missing_pallets}.")
-            yield env.timeout(2)  # Check inventory every 2 minutes
+            yield env.timeout(t_check_inventory)  # Check inventory every 2 minutes
     
 
 def perform_assembly(env, resource_handler, order, assembly_area):

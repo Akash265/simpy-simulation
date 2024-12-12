@@ -26,6 +26,7 @@ class ResourceHandler:
             levels_per_slot=config["storage_levels_per_slot"],
             pallet_types=config["pallet_types"]
         )
+        self.storage.initial_storage(config["initial_storage"])
         
         # Metrics
         self.forklift_usage_time = 0
