@@ -14,7 +14,8 @@ class ResourceHandler:
         - num_loading_docks: Number of loading docks available.
         """
         self.env = env
-        self.forklifts = simpy.Resource(env, capacity=num_forklifts)
+        
+        self.forklifts = simpy.PriorityResource(env, capacity=num_forklifts)
         self.unloading_docks = simpy.Resource(env, capacity=num_unloading_docks)
         self.loading_docks = simpy.Resource(env, capacity=num_loading_docks)
         self.assembly_areas = simpy.Resource(env, capacity=num_assembly_areas)

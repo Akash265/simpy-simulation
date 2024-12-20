@@ -88,7 +88,9 @@ class AdvancedStorage:
         self.pallet_types = pallet_types
         self.forklifts_per_unloading_dock = config["forklifts_per_unload_dock"]
         self.total_capacity = self.num_aisles*self.slots_per_aisle*self.levels_per_slot
-        
+        self.x_corrds = []
+        self.y_corrds = []
+        self.z_corrds = []
         # Group aisles into 1-2-2-2-2-2-2-2-1 arrangement for two sections.
         self.grouped_aisles = self._group_aisles()
         self.aisle_assignment = self._assign_aisles_to_pallets()
@@ -168,6 +170,8 @@ class AdvancedStorage:
         section_1_aisles = range(0, 16)
         section_2_aisles = range(16, 32)
         
+        
+        
         # For each section, we will assign coordinates to the aisles, slots, and levels
         for section_idx, section_start_x in enumerate([section_1_start_x, section_2_start_x]):
             section_name = f"Section {section_idx + 1}"
@@ -189,6 +193,9 @@ class AdvancedStorage:
                             # Store the coordinate
                             aisle_coordinates.append((x, y, z))
                             coordinates[(aisle,slot,level)]=(x,y,z)
+                            self.x_corrds.append(x)
+                            self.y_corrds.append(y)
+                            self.z_corrds.append(z)
                         x += each_slot_width
                     section_coordinates.append(aisle_coordinates)
                     if aisle + 1 in grp:y +=each_aisle_width*2
@@ -398,3 +405,9 @@ class AdvancedStorage:
         return None
 
 
+storage = AdvancedStorage(
+            num_aisles=config["storage_aisles"],
+            slots_per_aisle=config["storage_slots_per_aisle"],
+            levels_per_slot=config["storage_levels_per_slot"],
+            pallet_types=config["pallet_types"]
+        )

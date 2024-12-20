@@ -78,9 +78,9 @@ class Config:
 '''
 config = {
     # Simulation parameters
-    "forklifts": 34,  # Number of forklifts available in the warehouse
-    "forklifts_per_unload_dock": 4, # Number of forklifts allocated per unloading dock
-    "forklifts_per_order_assembly": 2,
+    "forklifts": 40,  # Number of forklifts available in the warehouse
+    "forklifts_per_unload_dock": 21, # Number of forklifts allocated per unloading dock
+    "forklifts_per_order_assembly":20,
     "unloading_trucks_per_hour": 6,  # Number of trucks arriving for unloading per hour
     "loading_trucks_per_hour": 4,  # Number of trucks arriving for loading per hour
     "orders_per_hour": 8,  # Number of orders generated per hour
